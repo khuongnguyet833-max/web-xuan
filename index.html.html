@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Nghe nhạc lạ – Đoán thơ quen</title>
+
+<style>
+body{
+    background: linear-gradient(to bottom, #ffe4ec, #ffffff);
+    font-family: Arial;
+    text-align: center;
+    padding:20px;
+}
+h1{
+    color:#c9184a;
+}
+select, button{
+    padding:12px;
+    border-radius:18px;
+    border:2px solid #f4a6c1;
+    font-size:16px;
+    margin:5px;
+}
+button{
+    background:#ff758f;
+    color:white;
+    cursor:pointer;
+}
+button:hover{
+    background:#ff4d6d;
+}
+#box{
+    margin:25px auto;
+    width:80%;
+    background:#fff;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎵 Nghe nhạc lạ – Đoán thơ quen 🎵</h1>
+<p>Chọn bài thơ, AI sẽ biến tấu thành rap/EDM mang sắc xuân.</p>
+
+<select id="tho">
+  <option value="Mùa xuân nho nhỏ - Thanh Hải">Mùa xuân nho nhỏ</option>
+  <option value="Vội vàng - Xuân Diệu">Vội vàng</option>
+  <option value="Đây mùa thu tới - Xuân Diệu">Đây mùa thu tới</option>
+  <option value="Ông đồ - Vũ Đình Liên">Ông đồ</option>
+</select>
+
+<br><br>
+
+<button onclick="lamnhac()">🎶 Biến tấu thành nhạc</button>
+
+<a id="velink" href="#" target="_blank">
+  <button>🎨 Vẽ tranh bằng AI</button>
+</a>
+
+<div id="box"></div>
+
+<script>
+function lamnhac(){
+    let t = document.getElementById("tho").value;
+
+    let prompt = "Biến nội dung bài thơ " + t + 
+    " thành lời nhạc rap hoặc EDM vui tươi, nhịp nhanh, mang không khí mùa xuân tuổi trẻ.";
+
+    let url = "https://text.pollinations.ai/prompt/" + encodeURIComponent(prompt);
+
+    fetch(url)
+      .then(res => res.text())
+      .then(data => {
+          document.getElementById("box").innerHTML =
+          "<b>🎧 Phiên bản nhạc:</b><br><br>" + data +
+          "<br><br><i>👉 Học sinh đoán tên bài thơ gốc nhé!</i>";
+      });
+}
+
+document.getElementById("velink").onclick = function(){
+   let t = document.getElementById("tho").value;
+   let prompt = "Vẽ tranh minh họa bài thơ " + t + 
+   ", phong cách watercolor, hoa đào, màu hồng xuân, ánh sáng dịu.";
+
+   this.href = "https://www.bing.com/images/create?q=" + encodeURIComponent(prompt);
+}
+</script>
+
+</body>
+</html>
